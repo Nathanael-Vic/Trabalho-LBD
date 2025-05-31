@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Banco Malvader - Início</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='darth.png') }}" />
+  <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="#" class="logo-link">
+        <img src="{{ url_for('static', filename='darth.png') }}" alt="Darth Vader" class="logo-icon" />
+        Banco Malvader
+      </a>
+    </div>
+  </header>
+
+  <main class="horizontal-container">
+    <!-- Lado esquerdo -->
+    <div class="left-side">
+      <div class="welcome-box">
+        <h1>Bem-vindo!</h1>
+        <p>
+          Acesse o sistema de forma segura com autenticação criptografada.
+        </p>
+      </div>
+    </div>
+
+    <!-- Lado direito -->
+    <div class="right-side">
+      <!-- Caixa de seleção de login -->
+      <div class="access-box" id="botoes-acesso">
+        <h2>Escolha o tipo de acesso</h2>
+        <a id="botaoCliente" class="btn blue" href="#" onclick="showLoginForm('cliente')">Login Cliente</a>
+        <a id="botaoFuncionario" class="btn gray" href="#" onclick="showLoginForm('funcionario')">Login Funcionário</a>
+      </div>
+
+      <!-- Formulário de login (oculto por padrão) -->
+      <form class="login-form" method="POST" id="form-login" style="display: none;">
+        <h2 id="form-titulo">Login</h2>
+        <input type="hidden" name="tipo" id="tipo" value="" />
+
+        <label id="form-label-email">Email:</label>
+        <input type="email" name="email" required />
+
+        <label>Senha:</label>
+        <input type="password" name="senha" required />
+
+        <button type="submit">Entrar</button>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li class="danger">{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>
